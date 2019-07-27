@@ -1,11 +1,11 @@
-const db = require('../../dataBase').getInstance();
+const dataBase = require('../../dataBase').getInstance();
 const tokinayzer = require('../../helpers/tokinayzer');
 
 //Реєстрація користувача
 
 module.exports = async (req, res) => {
     try {
-        const UserModel = db.getModel('users');
+        const UserModel = dataBase.getModel('users');
         const {email, password} = req.body;
 
         if (!email || !password) throw new Error('Some field is empty');

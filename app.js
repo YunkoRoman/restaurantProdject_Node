@@ -18,6 +18,7 @@ app.use(express.urlencoded({extended: true}));
 
 dataBase.setModels();
 
+
 app.use('/user', registrationUser);
 
 

@@ -3,7 +3,7 @@ let {secret} = require('../constants/secret');
 
 module.exports = {
 
-    auth: token => {
+    registration: token => {
 
         if (!token) throw new Error('No token');
         let user = null;

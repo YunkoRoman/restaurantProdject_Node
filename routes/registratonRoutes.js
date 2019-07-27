@@ -1,13 +1,11 @@
 const router = require('express').Router();
 
 const regisrtrationUser = require('../controllers/registration/registration');
-const AuthUser = require('../controllers/auth/authUser');
-
+const confirmationRegistration = require('../controllers/registration/confirmationRegistration')
 
 
 router.post('/registration', regisrtrationUser);
-router.post ('/auth',AuthUser);
-
+router.get('/checked', confirmationRegistration);
 
 
 module.exports = router;

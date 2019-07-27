@@ -1,4 +1,5 @@
 const dataBase = require('../../dataBase').getInstance();
+const sendEmail = require('../../helpers/SendEmailforRegistration');
 
 module.exports = async (req, res) => {
   try {
@@ -12,11 +13,14 @@ module.exports = async (req, res) => {
               name,
               surname,
               email,
-              password
+              password,
+              checked: false
           });
+      const info = await sendEmail(createNewUser.id, email);
       res.json({
           success: true,
-          msg: createNewUser
+          msg: createNewUser,
+          msg2: info
       })
 
   } catch (e) {
