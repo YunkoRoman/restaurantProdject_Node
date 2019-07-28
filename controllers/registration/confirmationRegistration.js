@@ -4,9 +4,10 @@ const tokenVerificator = require('../../helpers/tokenVerifikator').registration;
 module.exports = async (req, res) => {
     try {
         const UserModel = dataBase.getModel('users');
-        const {t:token} = req.query;
-
+        const {token} = req.body;
+        console.log(token);
         const {user:id} = tokenVerificator(token);
+        console.log(id);
         if (!token) throw new Error('No token');
         if (!id) throw new Error('User not valid');
 

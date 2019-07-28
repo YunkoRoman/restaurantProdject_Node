@@ -27,7 +27,7 @@ function BuildingTemplate(user) {
     const html =
         `<h1> Для підтвердження реєстрації, нажміть на кнопку </h1>
         <br>
-        <a href="http://localhost:3000/user/checked?t=${token}">Підтвердити</a>
+        <a href="http://localhost:4200/user/checked?t=${token}">Підтвердити</a>
        `;
 
     return html

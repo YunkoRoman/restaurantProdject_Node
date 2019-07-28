@@ -5,7 +5,7 @@ const confirmationRegistration = require('../controllers/registration/confirmati
 
 
 router.post('/registration', regisrtrationUser);
-router.get('/checked', confirmationRegistration);
+router.post('/checked', confirmationRegistration);
 
 
 module.exports = router;
