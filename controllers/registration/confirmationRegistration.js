@@ -1,6 +1,9 @@
 const dataBase = require('../../dataBase').getInstance();
 const tokenVerificator = require('../../helpers/tokenVerifikator').registration;
 
+//Підтвердження пошти.
+//З фронта приходить токен, ми його розшифровуємо та змінюємо checked на true
+
 module.exports = async (req, res) => {
     try {
         const UserModel = dataBase.getModel('users');
@@ -11,7 +14,7 @@ module.exports = async (req, res) => {
         if (!token) throw new Error('No token');
         if (!id) throw new Error('User not valid');
 
-         const checkedUser = await UserModel.update({
+        const checkedUser = await UserModel.update({
                checked: true
            }, {
                where:{

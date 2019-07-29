@@ -1,5 +1,5 @@
 const dataBase = require('../../dataBase').getInstance();
-const tokinayzer = require('../../helpers/tokinayzer');
+const tokinayzer = require('../../helpers/tokinayzer').auth;
 
 //Реєстрація користувача
 

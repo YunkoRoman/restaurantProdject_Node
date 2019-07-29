@@ -1,1 +1,4 @@
-module.exports.secret = 'SuperSecret';
+module.exports= {
+     secret: 'SuperSecret',
+     AuthSecret: 'MegaSecret'
+};

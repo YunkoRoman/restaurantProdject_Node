@@ -1,6 +1,8 @@
 const {email, password} = require('../constants/mailInfo');
 const mailer = require('nodemailer');
-const TokenGenerator = require('../helpers/tokinayzer');
+const TokenGenerator = require('../helpers/tokinayzer').register;
+
+// Скріпт відправки токена на пошту
 
 module.exports = async (user, UserEmail) => {
     const transport = mailer.createTransport({
