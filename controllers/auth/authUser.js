@@ -1,9 +1,10 @@
 const dataBase = require('../../dataBase').getInstance();
 const tokinayzer = require('../../helpers/tokinayzer').auth;
+const ControllerError = require('../../errors/ControllerError');
 
 //Реєстрація користувача
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         const UserModel = dataBase.getModel('users');
         const {email, password} = req.body;
@@ -20,7 +21,7 @@ module.exports = async (req, res) => {
 
         const {id, name, surname} = UserIsRegistr;
 
-        let token = tokinayzer({id, name, surname});
+        const token = tokinayzer({id, name, surname});
 
         res.json({
             success: true,
@@ -31,11 +32,7 @@ module.exports = async (req, res) => {
 
 
     } catch (e) {
-        console.log(e);
-        res.status(400).json({
-            success: false,
-            msg: e.message
-        })
+       next( new ControllerError(e.message, e.status, 'authUser'))
     }
 
 };

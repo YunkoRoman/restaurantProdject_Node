@@ -1,5 +1,6 @@
 const dataBase = require('../../dataBase').getInstance();
 const tokenVerificator = require('../../helpers/tokenVerifikator').registration;
+const ControllerError = require('../../errors/ControllerError');
 
 //Підтвердження пошти.
 //З фронта приходить токен, ми його розшифровуємо та змінюємо checked на true
@@ -31,11 +32,7 @@ module.exports = async (req, res) => {
         })
 
     } catch (e) {
-        console.log(e);
-        res.status(400).json({
-            success: false,
-            msg: e.message
-        })
+        next( new ControllerError(e.message, e.status, 'authUser'))
     }
 
 };

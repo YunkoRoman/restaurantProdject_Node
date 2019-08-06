@@ -1,5 +1,6 @@
 const dataBase = require('../../dataBase').getInstance();
 const sendEmail = require('../../helpers/SendEmailforRegistration');
+const ControllerError = require('../../errors/ControllerError');
 //Реєстрація користувача
 module.exports = async (req, res) => {
   try {
@@ -35,10 +36,6 @@ module.exports = async (req, res) => {
 
 
   } catch (e) {
-      console.log(e);
-      res.status(400).json({
-          success: false,
-          msg: e.message
-      })
+      next( new ControllerError(e.message, e.status, 'authUser'))
   }
 };
