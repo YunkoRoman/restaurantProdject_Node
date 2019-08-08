@@ -5,8 +5,6 @@ module.exports = async (req, res, next) => {
         const RestaurantsModel = dataBase.getModel('restaurants');
         const AllRestaurant = await RestaurantsModel.findAll();
 
-
-
         res.json({
             success: true,
             msg: AllRestaurant

@@ -1,7 +1,9 @@
 const dataBase = require('../../dataBase').getInstance();
 const sendEmail = require('../../helpers/SendEmailforRegistration');
 const ControllerError = require('../../errors/ControllerError');
+
 //Реєстрація користувача
+
 module.exports = async (req, res) => {
   try {
       const UserModel = dataBase.getModel('users');
