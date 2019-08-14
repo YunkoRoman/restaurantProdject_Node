@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const pizza_menu = sequelize.define('pizza_menu', {
+    const breakfasts = sequelize.define('breakfasts', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -10,12 +10,17 @@ module.exports = (sequelize, DataTypes) => {
         },
         description: {
             type: DataTypes.STRING
+        },
+        restaurant_id: {
+            type: DataTypes.STRING,
+            foreignKey: true
         }
     }, {
-        tableName: 'pizza_menu',
+        tableName: 'breakfasts',
         timestamps: false
     });
+    const restaurants = sequelize.import('./restaurants.js');
+    breakfasts.belongsTo(restaurants, {foreignKey: 'restaurant_id'});
 
-
-    return pizza_menu
+    return breakfasts
 };
