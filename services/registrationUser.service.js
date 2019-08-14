@@ -16,7 +16,7 @@ class registrationService {
             })
 
         } catch (e) {
-            throw new ControllerError(e.parent.sqlMessage, 500, 'userService/registrationUser')
+            throw new ControllerError(e.parent.sqlMessage, 500, 'registrationService/registrationUser')
         }
     }
 
@@ -30,7 +30,7 @@ class registrationService {
             })
 
         } catch (e) {
-            throw new ControllerError(e.parent.sqlMessage, 500, 'userService/registrationUser')
+            throw new ControllerError(e.parent.sqlMessage, 500, 'registrationService/findEmail')
         }
     }
 }

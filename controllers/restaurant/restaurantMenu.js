@@ -9,12 +9,12 @@ module.exports = async (req, res, next) => {
         if (!id) throw new Error('Not restaurant id');
 
 
-        const Pizza = await intermediate.findAll(
-            {
-                include:[
-                    {model: PizzaModel,
-                        attributes:["id", "name", "description"]},
-                    {model: RestaurantModel,
+        // const Pizza = await intermediate.findAll(
+        //     {
+        //         include:[
+        //             {model: PizzaModel,
+        //                 attributes:["id", "name", "description"]},
+        //             {model: RestaurantModel,
 
 
 

@@ -1,16 +1,16 @@
-const dataBase = require('../../dataBase').getInstance();
 const ControllerError = require('../../errors/ControllerError');
+const {restaurantService} = require('../../services');
+
 module.exports = async (req, res, next) => {
     try {
-        const RestaurantsModel = dataBase.getModel('restaurants');
-        const AllRestaurant = await RestaurantsModel.findAll();
+        const AllRestaurant = await restaurantService.restaurantList();
 
         res.json({
             success: true,
             msg: AllRestaurant
         });
     } catch (e) {
-        next( new ControllerError(e.message, e.status, 'authUser'))
+        next( new ControllerError(e.message, e.status, 'controllers/restaurant/restaurantList'))
     }
 
 };
