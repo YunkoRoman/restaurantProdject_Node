@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const regisrtrationUser = require('../controllers/registration/registration');
+const regisrtrationUser = require('../controllers/registration/registrationUser');
 const confirmationRegistration = require('../controllers/registration/confirmationRegistration')
 
 //Роутери для реєстрацї

@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 dataBase.setModels();
-app.use('/user', RegistrationUser,AuthUser );
+app.use('/user', RegistrationUser, AuthUser );
 app.use('/restaurants', Restaurants );
 
 app.use((req, res, next) => {
