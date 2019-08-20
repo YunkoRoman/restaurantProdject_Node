@@ -3,16 +3,40 @@ const ControllerError = require('../errors/ControllerError');
 
 class authService {
     
-    authUser(userObj) {
+    authUser (email, password) {
         const UserModel = dataBase.getModel('users');
         
         try {
-            return UserModel.findOne(userObj)
+            if (!email || !password) throw new Error('Some field is empty');
+            return UserModel.findOne({
+                where: {
+                    email,
+                    password
+                }
+            })
 
         }catch (e) {
             throw new ControllerError(e.parent.sqlMessage, 500, 'userService/authUser')
         }
     }
+    userIsRegister(id, name, surname) {
+        const UserModel = dataBase.getModel('users');
+
+        try {
+            if (!id || !name || !surname) throw new Error('Some field is empty');
+            return UserModel.findOne({
+                where: {
+                    id,
+                    name,
+                    surname
+                }
+            })
+
+        }catch (e) {
+            throw new ControllerError(e.parent.sqlMessage, 500, 'userService/authUser')
+        }
+    }
+
 }
 
 

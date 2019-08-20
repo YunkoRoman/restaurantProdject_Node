@@ -6,7 +6,7 @@ const pizza = require('../controllers/restaurant/pizzas');
 
 //Роутери для ресторанів
 router.get('/', restaurant);
-router.get('/menu/:id', pizza);
+router.get('/menu/pizza/:id', pizza);
 
 
 
