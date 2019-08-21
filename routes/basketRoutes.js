@@ -1,7 +1,9 @@
 const router = require('express').Router();
-const basket = require('../controllers/restaurant/basket');
+const readProduct = require('../controllers/basket/readproduct');
+const deleteProduct = require('../controllers/basket/deleteProduct');
 
 //Роутери для корзини
-router.get('/basket', basket);
+router.get('/basket', readProduct);
+router.delete('/basket', deleteProduct);
 
 module.exports = router;

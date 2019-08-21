@@ -1,6 +1,6 @@
 const tokenVerifikator = require('../../helpers/tokenVerifikator');
 const ControllerError = require('../../errors/ControllerError');
-const {authService, baasketService} = require('../../services');
+const {authService, baasketService} = require('../../services/index');
 
 module.exports = async (req, res, next) => {
     try {
