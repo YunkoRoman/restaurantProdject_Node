@@ -4,11 +4,16 @@ const ControllerError = require('../errors/ControllerError');
 class basketService {
     uploadProduct(id) {
         const basketModel = dataBase.getModel('basket');
+        const productModel = dataBase.getModel('products');
         try {
 
             return basketModel.findAll({
-                where:{
-                    user_id:id
+                include: [{
+                    model: productModel,
+                    attributes: ["id", "name", 'menu_id']
+                }],
+                where: {
+                    user_id: id
                 }
             })
         } catch (e) {
@@ -21,7 +26,7 @@ class basketService {
         try {
 
             return basketModel.destroy({
-                where:{
+                where: {
                     id
                 }
             })
@@ -30,7 +35,8 @@ class basketService {
         }
 
     }
-    addProduct (productObj) {
+
+    addProduct(productObj) {
         const basketModel = dataBase.getModel('basket');
         try {
 
