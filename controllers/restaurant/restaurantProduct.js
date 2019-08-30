@@ -2,16 +2,16 @@ const ControllerError = require('../../errors/ControllerError');
 const {restaurantService} = require('../../services');
 module.exports = async (req, res, next) => {
     try {
-        const restaurant_id = req.params.id;
+        const menu_id = req.params.id;
 
-        const menu = await restaurantService.restaurantMenu(restaurant_id);
+        const products = await restaurantService.restaurantProduct(menu_id);
 
         res.json({
             success: true,
-            msg:menu
+            msg:products
         });
     } catch (e) {
-        next(new ControllerError(e.message, e.status, 'restaurantMenu'))
+        next(new ControllerError(e.message, e.status, 'restaurantProduct'))
     }
 
 };

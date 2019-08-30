@@ -5,10 +5,6 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        name: {
-            type: DataTypes.STRING
-        },
-
         user_id: {
             type: DataTypes.STRING,
             foreignKey: true

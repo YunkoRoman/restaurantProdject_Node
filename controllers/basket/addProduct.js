@@ -1,6 +1,6 @@
 const tokenVerifikator = require('../../helpers/tokenVerifikator');
 const ControllerError = require('../../errors/ControllerError');
-const {authService, baasketService} = require('../../services/index');
+const {authService, basketService} = require('../../services/index');
 
 module.exports = async (req, res, next) => {
     try {
@@ -12,15 +12,16 @@ module.exports = async (req, res, next) => {
         const UserIsRegistr = await authService.userIsRegister(id, name, surname);
         if (!UserIsRegistr) throw new Error('You are not register');
 
-        const productObj = req.body;
-        const addProduct = await baasketService.addProduct(productObj);
+        const {product_id} = req.body;
+        if (!product_id) throw new Error('No Product Id');
+        const addProduct = await basketService.addProduct(product_id, id);
 
         res.json({
             success: true,
             msg: addProduct
         })
     } catch (e) {
-        next( new ControllerError(e.message, e.status, 'basket'))
+        next( new ControllerError(e.message, e.status, 'basket/addProduct'))
     }
 
 };

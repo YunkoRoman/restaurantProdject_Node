@@ -4,8 +4,8 @@ const deleteProduct = require('../controllers/basket/deleteProduct');
 const addProduct = require('../controllers/basket/addProduct');
 
 //Роутери для корзини
-router.get('/basket', readProduct);
-router.delete('/basket', deleteProduct);
-router.post('/basket', addProduct);
+router.get('', readProduct);
+router.delete('/:id', deleteProduct);
+router.post('', addProduct);
 
 module.exports = router;

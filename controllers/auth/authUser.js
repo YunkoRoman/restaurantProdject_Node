@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
     try {
 
         const {email, password} = req.body;
-        if (!email || !password) throw new Error('Some field is empty');
+        if (!email && !password) throw new Error('Some field is empty');
 
         const UserIsRegistr = await authService.authUser(email, password);
         if (!UserIsRegistr) throw new Error('You are not register');

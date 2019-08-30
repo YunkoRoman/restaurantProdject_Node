@@ -29,7 +29,7 @@ app.use(express.urlencoded({extended: true}));
 dataBase.setModels();
 app.use('/user', RegistrationUser, AuthUser );
 app.use('/restaurants', Restaurants );
-app.use('', Basket);
+app.use('/basket', Basket);
 
 app.use((req, res, next) => {
     const err = new Error('Page not found');

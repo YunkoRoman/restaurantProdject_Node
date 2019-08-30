@@ -21,13 +21,13 @@ class basketService {
         }
     }
 
-    deleteProduct(id) {
+    deleteProduct(basketProductId) {
         const basketModel = dataBase.getModel('basket');
         try {
 
             return basketModel.destroy({
                 where: {
-                    id
+                    id:basketProductId
                 }
             })
         } catch (e) {
@@ -36,11 +36,13 @@ class basketService {
 
     }
 
-    addProduct(productObj) {
+    addProduct(product_id, user_id) {
         const basketModel = dataBase.getModel('basket');
         try {
-
-            return basketModel.create(productObj)
+            return basketModel.create({
+                product_id,
+                user_id
+            })
         } catch (e) {
             throw new ControllerError(e.parent.sqlMessage, 500, 'basketService/addProduct')
         }

@@ -24,11 +24,11 @@ module.exports = (sequelize, DataTypes) => {
             tableName: 'products',
             timestamps: false
         });
-    const menu = sequelize.import('./menus.js');
-    products.belongsTo(menu, {foreignKey: 'menu_id'});
-
-    const restaurant = sequelize.import('./restaurants.js');
-    products.belongsTo(restaurant, {foreignKey: 'restaurant_id'});
+    // const menu = sequelize.import('./menus.js');
+    // products.belongsTo(menu, {foreignKey: 'menu_id'});
+    //
+    // const restaurant = sequelize.import('./restaurants.js');
+    // products.belongsTo(restaurant, {foreignKey: 'restaurant_id'});
 
     return products
 };

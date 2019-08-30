@@ -7,7 +7,7 @@ class authService {
         const UserModel = dataBase.getModel('users');
         
         try {
-            if (!email || !password) throw new Error('Some field is empty');
+            if (!email && !password) throw new Error('Some field is empty');
             return UserModel.findOne({
                 where: {
                     email,
@@ -33,7 +33,7 @@ class authService {
             })
 
         }catch (e) {
-            throw new ControllerError(e.parent.sqlMessage, 500, 'userService/authUser')
+            throw new ControllerError(e.parent.sqlMessage, 500, 'userService/userIsRegister')
         }
     }
 

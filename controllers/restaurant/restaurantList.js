@@ -3,6 +3,7 @@ const {restaurantService} = require('../../services');
 
 module.exports = async (req, res, next) => {
     try {
+
         const AllRestaurant = await restaurantService.restaurantList();
 
         res.json({
