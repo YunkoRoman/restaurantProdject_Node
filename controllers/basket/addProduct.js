@@ -13,13 +13,27 @@ module.exports = async (req, res, next) => {
         if (!UserIsRegistr) throw new Error('You are not register');
 
         const {product_id} = req.body;
+
+        //checks whether such product is in the basket
+        const checkProduct = await basketService.CheckProduct(product_id, id);
+
+        if (checkProduct) {
+            const {id, quantity} = checkProduct;
+            const updateOrder = await basketService.addQuantity(id, quantity);
+
+            res.json({
+                success: true,
+                msg: updateOrder
+            })
+        } else {
+
+
         if (!product_id) throw new Error('No Product Id');
         const addProduct = await basketService.addProduct(product_id, id);
-
         res.json({
             success: true,
             msg: addProduct
-        })
+        })}
     } catch (e) {
         next( new ControllerError(e.message, e.status, 'basket/addProduct'))
     }

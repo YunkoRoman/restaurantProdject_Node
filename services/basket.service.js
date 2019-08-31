@@ -27,7 +27,7 @@ class basketService {
 
             return basketModel.destroy({
                 where: {
-                    id:basketProductId
+                    id: basketProductId
                 }
             })
         } catch (e) {
@@ -41,11 +41,43 @@ class basketService {
         try {
             return basketModel.create({
                 product_id,
-                user_id
+                user_id,
+                quantity: 1
             })
         } catch (e) {
             throw new ControllerError(e.parent.sqlMessage, 500, 'basketService/addProduct')
         }
+    }
+
+    CheckProduct(product_id, user_id) {
+        const basketModel = dataBase.getModel('basket');
+        try {
+            return basketModel.findOne({
+                where: {
+                    product_id,
+                    user_id
+                }
+            })
+        } catch (e) {
+            throw new ControllerError(e.parent.sqlMessage, 500, 'basketService/CheckProduct')
+        }
+    }
+
+    addQuantity(idOrderInBasket, quantity) {
+        const basketModel = dataBase.getModel('basket');
+        try {
+            const Quantity = ++quantity;
+            return basketModel.update({
+                quantity:Quantity
+            }, {
+                where: {
+                    id: idOrderInBasket
+                }
+            })
+        } catch (e) {
+            throw new ControllerError(e.parent.sqlMessage, 500, 'basketService/addQuantity')
+        }
+
     }
 }
 

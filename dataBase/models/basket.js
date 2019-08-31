@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
         product_id: {
             type: DataTypes.STRING,
             foreignKey: true
+        },
+        quantity: {
+            type: DataTypes.INTEGER
         }
     }, {
         tableName: 'basket',
