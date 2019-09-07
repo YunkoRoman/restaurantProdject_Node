@@ -11,8 +11,8 @@ module.exports = async (req, res, next) => {
         const {id, name, surname} = tokenVerifikator.auth(token);
         const UserIsRegistr = await authService.userIsRegister(id, name, surname);
         if (!UserIsRegistr) throw new Error('You are not register');
-        const basketProductId = req.params.id;
-        const deleteProduct = await basketService.deleteProduct(basketProductId);
+        const {id:productIdWithBasket} = req.body;
+        const deleteProduct = await basketService.deleteProduct(productIdWithBasket);
 
         res.json({
             success: true,

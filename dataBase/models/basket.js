@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         quantity: {
             type: DataTypes.INTEGER
+        },
+        total_price:{
+            type: DataTypes.INTEGER
         }
     }, {
         tableName: 'basket',

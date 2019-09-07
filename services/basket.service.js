@@ -10,7 +10,7 @@ class basketService {
             return basketModel.findAll({
                 include: [{
                     model: productModel,
-                    attributes: ["id", "name", 'menu_id']
+                    attributes: ["id", "name", 'menu_id', 'price']
                 }],
                 where: {
                     user_id: id
@@ -36,13 +36,15 @@ class basketService {
 
     }
 
-    addProduct(product_id, user_id) {
+    addProduct(product_id, user_id, price) {
         const basketModel = dataBase.getModel('basket');
+        const Price = Number(price);
         try {
             return basketModel.create({
                 product_id,
                 user_id,
-                quantity: 1
+                quantity: 1,
+                total_price: Price
             })
         } catch (e) {
             throw new ControllerError(e.parent.sqlMessage, 500, 'basketService/addProduct')
@@ -63,12 +65,15 @@ class basketService {
         }
     }
 
-    addQuantity(idOrderInBasket, quantity) {
+    addQuantity(idOrderInBasket, quantity, price) {
         const basketModel = dataBase.getModel('basket');
         try {
+            const Price = Number(price);
             const Quantity = ++quantity;
+            const total_price = Quantity * Price;
             return basketModel.update({
-                quantity:Quantity
+                quantity: Quantity,
+                total_price
             }, {
                 where: {
                     id: idOrderInBasket
@@ -78,6 +83,47 @@ class basketService {
             throw new ControllerError(e.parent.sqlMessage, 500, 'basketService/addQuantity')
         }
 
+    }
+    addQuantityWhenTouchInput(idOrderInBasket, quantity, price){
+        const basketModel = dataBase.getModel('basket');
+        try {
+           if (quantity >= 1) {
+               const Price = Number(price);
+               const Quantity = Number(quantity);
+               const total_price = Quantity * Price;
+               return basketModel.update({
+                   quantity: Quantity,
+                   total_price
+               }, {
+                   where: {
+                       id: idOrderInBasket
+                   }
+               })
+           }
+        } catch (e) {
+            throw new ControllerError(e.parent.sqlMessage, 500, 'basketService/addQuantityOnTouchInput')
+        }
+    }
+
+    subtractionQuantity(idOrderInBasket, quantity, price) {
+        const basketModel = dataBase.getModel('basket');
+        try {
+            if (quantity > 1) {
+                const Price = Number(price);
+                const Quantity = --quantity;
+                const total_price = Quantity * Price;
+                return basketModel.update({
+                    quantity: Quantity,
+                    total_price
+                }, {
+                    where: {
+                        id: idOrderInBasket
+                    }
+                })
+            }
+        } catch (e) {
+            throw new ControllerError(e.parent.sqlMessage, 500, 'basketService/subtractionQuantity')
+        }
     }
 }
 

@@ -4,7 +4,7 @@ const {basketService} = require('../../services/index');
 module.exports = async (req, res, next) => {
     try {
         const {id, quantity, price} = req.body;
-        const Add = await basketService.addQuantity(id, quantity, price);
+        const Add = await basketService.addQuantityWhenTouchInput(id, quantity, price);
         res.json({
             success: true,
             msg: Add

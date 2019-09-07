@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
             menu_id: {
                 type: DataTypes.STRING,
                 foreignKey: true
+            },
+            price:{
+                type: DataTypes.STRING,
             }
         },
         {

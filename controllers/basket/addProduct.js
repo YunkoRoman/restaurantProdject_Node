@@ -12,14 +12,14 @@ module.exports = async (req, res, next) => {
         const UserIsRegistr = await authService.userIsRegister(id, name, surname);
         if (!UserIsRegistr) throw new Error('You are not register');
 
-        const {product_id} = req.body;
+        const {product_id, price} = req.body;
 
         //checks whether such product is in the basket
         const checkProduct = await basketService.CheckProduct(product_id, id);
 
         if (checkProduct) {
-            const {id, quantity} = checkProduct;
-            const updateOrder = await basketService.addQuantity(id, quantity);
+            const {id, quantity, total_price: price} = checkProduct;
+            const updateOrder = await basketService.addQuantity(id, quantity, price);
 
             res.json({
                 success: true,
@@ -28,14 +28,15 @@ module.exports = async (req, res, next) => {
         } else {
 
 
-        if (!product_id) throw new Error('No Product Id');
-        const addProduct = await basketService.addProduct(product_id, id);
-        res.json({
-            success: true,
-            msg: addProduct
-        })}
+            if (!product_id) throw new Error('No Product Id');
+            const addProduct = await basketService.addProduct(product_id, id, price);
+            res.json({
+                success: true,
+                msg: addProduct
+            })
+        }
     } catch (e) {
-        next( new ControllerError(e.message, e.status, 'basket/addProduct'))
+        next(new ControllerError(e.message, e.status, 'basket/addProduct'))
     }
 
 };
