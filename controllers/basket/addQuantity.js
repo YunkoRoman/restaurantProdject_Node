@@ -1,6 +1,8 @@
 const ControllerError = require('../../errors/ControllerError');
 const {basketService} = require('../../services/index');
 
+//Додавання клькості продуктів в корзині
+
 module.exports = async (req, res, next) => {
     try {
         const {id, quantity, price} = req.body;

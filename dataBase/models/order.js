@@ -1,10 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
-    const basket = sequelize.define('basket', {
+    const order = sequelize.define('order', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
+
         user_id: {
             type: DataTypes.STRING,
             foreignKey: true
@@ -16,20 +17,13 @@ module.exports = (sequelize, DataTypes) => {
         quantity: {
             type: DataTypes.INTEGER
         },
-        total_price:{
-            type: DataTypes.INTEGER
-        },
-        restaurant_id:{
+        restaurant_id: {
             type: DataTypes.INTEGER
         }
     }, {
-        tableName: 'basket',
+        tableName: 'order',
         timestamps: false
     });
-    const users = sequelize.import('./users.js');
-    basket.belongsTo(users, {foreignKey: 'user_id'});
 
-    const product = sequelize.import('./products.js');
-    basket.belongsTo(product, {foreignKey: 'product_id'});
-    return basket
+    return order
 };

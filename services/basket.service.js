@@ -36,7 +36,8 @@ class basketService {
 
     }
 
-    addProduct(product_id, user_id, price) {
+    addProduct(product_id, user_id, price, restaurant_id) {
+        console.log(restaurant_id);
         const basketModel = dataBase.getModel('basket');
         const Price = Number(price);
         try {
@@ -44,7 +45,8 @@ class basketService {
                 product_id,
                 user_id,
                 quantity: 1,
-                total_price: Price
+                total_price: Price,
+                restaurant_id
             })
         } catch (e) {
             throw new ControllerError(e.parent.sqlMessage, 500, 'basketService/addProduct')

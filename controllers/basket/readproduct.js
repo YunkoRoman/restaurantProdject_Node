@@ -2,6 +2,8 @@ const tokenVerifikator = require('../../helpers/tokenVerifikator');
 const ControllerError = require('../../errors/ControllerError');
 const {authService, basketService} = require('../../services/index');
 
+//Витягування з бази всі продукти які лежать в корзині по даному юзеру
+
 module.exports = async (req, res, next) => {
     try {
 

@@ -1,27 +1,28 @@
-const tokenVerifikator = require('../../helpers/tokenVerifikator');
 const ControllerError = require('../../errors/ControllerError');
-const {authService, basketService} = require('../../services/index');
+const tokenVerifikator = require('../../helpers/tokenVerifikator');
+const {authService, orderService} = require('../../services');
 
-//Видалення продукту з корзини
+
 
 module.exports = async (req, res, next) => {
     try {
-
         const token = req.get('Authorization');
         if (!token) throw new Error('No token');
 
         const {id, name, surname} = tokenVerifikator.auth(token);
         const UserIsRegistr = await authService.userIsRegister(id, name, surname);
         if (!UserIsRegistr) throw new Error('You are not register');
-        const productIdWithBasket = req.params.id;
-        const deleteProduct = await basketService.deleteProduct(productIdWithBasket);
+
+        const searchProduct = await orderService.searchProduct(id);
+
+        const saveProduct = await orderService.saveOrder(searchProduct);
+        console.log(saveProduct);
 
         res.json({
-            success: true,
-            msg: deleteProduct
+            success: true
         })
     } catch (e) {
-        next( new ControllerError(e.message, e.status, 'basket/deleteProduct'))
+        next(new ControllerError(e.message, e.status, 'order/saveOrder'))
     }
-
-};
+    
+}

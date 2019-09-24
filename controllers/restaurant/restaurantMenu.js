@@ -1,5 +1,8 @@
 const ControllerError = require('../../errors/ControllerError');
 const {restaurantService} = require('../../services');
+
+//Дістаємо з бази список меню
+
 module.exports = async (req, res, next) => {
     try {
         const restaurant_id = req.params.id;
