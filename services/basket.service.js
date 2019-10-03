@@ -1,16 +1,19 @@
 const dataBase = require('../dataBase').getInstance();
 const ControllerError = require('../errors/ControllerError');
 
+const userMinAttr = ["id", "name", 'menu_id', 'price'];
+
 class basketService {
     uploadProduct(id) {
         const basketModel = dataBase.getModel('basket');
         const productModel = dataBase.getModel('products');
         try {
 
+            // liit offser order sort
             return basketModel.findAll({
                 include: [{
                     model: productModel,
-                    attributes: ["id", "name", 'menu_id', 'price']
+                    attributes: userMinAttr
                 }],
                 where: {
                     user_id: id

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const secret = require('../constants/secret').secret;
-const AuthSecret = require('../constants/secret').AuthSecret;
+
+const {AuthSecret, secret} = require('../constants/secret');
 
 module.exports = {
     auth: token => {

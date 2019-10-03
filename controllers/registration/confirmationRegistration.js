@@ -1,5 +1,5 @@
 const dataBase = require('../../dataBase').getInstance();
-const tokenVerificator = require('../../helpers/tokenVerifikator').registration;
+const {tokenVerifikator} = require('../../helpers');
 const ControllerError = require('../../errors/ControllerError');
 
 //Підтвердження пошти.
@@ -9,7 +9,8 @@ module.exports = async (req, res) => {
     try {
         const UserModel = dataBase.getModel('users');
         const {token} = req.body;
-        const {user:id} = tokenVerificator(token);
+        const {user:id} = tokenVerifikator(token);
+
         if (!token) throw new Error('No token');
         if (!id) throw new Error('User not valid');
 

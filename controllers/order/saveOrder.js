@@ -1,5 +1,5 @@
 const ControllerError = require('../../errors/ControllerError');
-const tokenVerifikator = require('../../helpers/tokenVerifikator');
+const {tokenVerifikator} = require('../../helpers');
 const {authService, orderService} = require('../../services');
 
 
@@ -11,13 +11,15 @@ module.exports = async (req, res, next) => {
 
         const {id, name, surname} = tokenVerifikator.auth(token);
         const UserIsRegistr = await authService.userIsRegister(id, name, surname);
+
         if (!UserIsRegistr) throw new Error('You are not register');
 
         const searchProduct = await orderService.searchProduct(id);
 
         const saveProduct = await orderService.saveOrder(searchProduct);
-        console.log(saveProduct);
-
+        // if (saveProduct === true) {
+        //     await orderService.deleteProductWithBasket(searchProduct)
+        // }
         res.json({
             success: true
         })

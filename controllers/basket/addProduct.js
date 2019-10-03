@@ -1,4 +1,4 @@
-const tokenVerifikator = require('../../helpers/tokenVerifikator');
+const {tokenVerifikator} = require('../../helpers');
 const ControllerError = require('../../errors/ControllerError');
 const {authService, basketService} = require('../../services/index');
 
@@ -7,6 +7,7 @@ const {authService, basketService} = require('../../services/index');
 module.exports = async (req, res, next) => {
     try {
 
+        // TODO middleware
         const token = req.get('Authorization');
         if (!token) throw new Error('No token');
 

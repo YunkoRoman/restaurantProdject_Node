@@ -1,10 +1,10 @@
 const router = require('express').Router();
 
-const regisrtrationUser = require('../controllers/registration/registrationUser');
-const confirmationRegistration = require('../controllers/registration/confirmationRegistration')
+
+const {registrationUser,confirmationRegistration} = require('../controllers/registration')
 
 //Роутери для реєстрацї
-router.post('/registration', regisrtrationUser);
+router.post('/registration', registrationUser);
 router.post('/checked', confirmationRegistration);
 
 

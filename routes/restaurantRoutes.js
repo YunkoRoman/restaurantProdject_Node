@@ -1,13 +1,12 @@
 const router = require('express').Router();
 
-const restaurant = require('../controllers/restaurant/restaurantList');
-const restaurantMenu = require('../controllers/restaurant/restaurantMenu');
-const restaurantProduct =  require('../controllers/restaurant/restaurantProduct');
+const {restaurantList, restaurantMenu, restaurantProduct} =  require('../controllers/restaurant');
 
 
 //Роутери для ресторанів
-router.get('/', restaurant);
+router.get('/', restaurantList);
 router.get('/:id', restaurantMenu);
+//TODO in future separate product router from restaurant router
 router.get('/product/:id', restaurantProduct)
 
 

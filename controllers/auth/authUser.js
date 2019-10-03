@@ -1,4 +1,4 @@
-const tokinayzer = require('../../helpers/tokinayzer').auth;
+const {tokinayzer} = require('../../helpers');
 const ControllerError = require('../../errors/ControllerError');
 const {authService} = require('../../services');
 
@@ -7,7 +7,6 @@ const {authService} = require('../../services');
 
 module.exports = async (req, res, next) => {
     try {
-
         const {email, password} = req.body;
         if (!email && !password) throw new Error('Some field is empty');
 

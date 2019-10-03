@@ -15,7 +15,8 @@ class restaurantService {
 
     restaurantMenu(restaurant_id) {
         const menus = dataBase.getModel('menus');
-        const restaurant = dataBase.getModel('restaurants')
+        const restaurant = dataBase.getModel('restaurants');
+
         try {
             return menus.findAll({
                 include: {

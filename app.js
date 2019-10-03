@@ -1,15 +1,11 @@
 const express = require('express');
 const path = require('path');
-require('./dataBase').getInstance();
-
 const cors = require('cors');
+
 const dataBase = require('./dataBase').getInstance();
 const app = express();
 
-const RegistrationUser = require('./routes/registratonRoutes');
-const AuthUser = require('./routes/auth');
-const Restaurants = require('./routes/restaurantRoutes');
-const Basket = require('./routes/basketRoutes');
+const {AuthUser,Restaurants,Basket,RegistrationUser} = require('./routes');
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin","http://localhost:4200");
@@ -47,10 +43,7 @@ app.use((err, req, res, next) => {
         })
 });
 
-
-
-
 app.listen(3000, err => {
-    if (err) console.log(err);
+    if (err) console.error(err);
     console.log('Server listen on port 3000');
 });

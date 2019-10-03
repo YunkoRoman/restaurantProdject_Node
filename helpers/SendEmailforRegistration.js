@@ -26,6 +26,7 @@ module.exports = async (user, UserEmail) => {
 
 function BuildingTemplate(user) {
     const token = TokenGenerator({user});
+    // TODO localhot 4200 o constant
     const html =
         `<h1> Для підтвердження реєстрації, нажміть на кнопку </h1>
         <br>

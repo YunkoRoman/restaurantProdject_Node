@@ -5,9 +5,9 @@ const {restaurantService} = require('../../services');
 
 module.exports = async (req, res, next) => {
     try {
-        const menu_id = req.params.id;
+        const {id} = req.params;
 
-        const products = await restaurantService.restaurantProduct(menu_id);
+        const products = await restaurantService.restaurantProduct(id);
 
         res.json({
             success: true,

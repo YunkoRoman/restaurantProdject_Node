@@ -1,0 +1,3 @@
+module.exports = {
+    ORDERS: 'orders'
+}

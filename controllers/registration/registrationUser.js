@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const sendEmail = require('../../helpers/SendEmailforRegistration');
+const {SendEmailforRegistration:sendEmail} = require('../../helpers');
 const ControllerError = require('../../errors/ControllerError');
 const {registrationService} = require('../../services');
 const {userValidator} = require('../../validators');
@@ -11,14 +11,18 @@ const {userValidator} = require('../../validators');
 module.exports = async (req, res, next) => {
     try {
         const userObj = req.body;
-        const {email} = userObj;
         if (!userObj) throw new Error('Some field is empty');
+
+        const {email} = userObj;
         const isUserValid = Joi.validate(userObj, userValidator);
+
         if (isUserValid.error) {
-            throw new ControllerError(isUserValid.error.details[0].message, 400, 'registration/registrationUser')};
+            throw new ControllerError(isUserValid.error.details[0].message, 400, 'registration/registrationUser')
+        }
 
         const findEmail = await registrationService.findEmail(email);
-        if (findEmail) throw new Error('Такий Email вже існує');
+
+        if (findEmail) throw new Error('Такий Email вже існує'); //TODO english
 
         const createNewUser = await registrationService.registrUser(userObj);
         const info = await sendEmail(createNewUser.id, email);

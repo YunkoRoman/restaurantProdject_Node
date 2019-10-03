@@ -23,6 +23,7 @@ class authService {
         const UserModel = dataBase.getModel('users');
 
         try {
+            // toDO service dont check it
             if (!id || !name || !surname) throw new Error('Some field is empty');
             return UserModel.findOne({
                 where: {

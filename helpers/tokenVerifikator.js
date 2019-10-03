@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-let secret = require('../constants/secret').secret;
-let AuthSecret = require('../constants/secret').AuthSecret;
+
+let {secret, AuthSecret} = require('../constants/secret');
 
 module.exports = {
     auth: token => {
