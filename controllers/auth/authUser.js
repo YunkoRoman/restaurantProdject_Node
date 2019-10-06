@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
         if (!UserIsRegistr) throw new Error('You are not register');
 
         const {id, name, surname} = UserIsRegistr;
-        const token = tokinayzer({id, name, surname});
+        const token = tokinayzer.auth({id, name, surname});
 
         res.json({
             success: true,

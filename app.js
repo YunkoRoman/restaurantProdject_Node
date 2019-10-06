@@ -5,7 +5,7 @@ const cors = require('cors');
 const dataBase = require('./dataBase').getInstance();
 const app = express();
 
-const {AuthUser,Restaurants,Basket,RegistrationUser} = require('./routes');
+const {AuthUser,Restaurants,Basket,RegistrationUser, Payment} = require('./routes');
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin","http://localhost:4200");
@@ -26,6 +26,7 @@ dataBase.setModels();
 app.use('/user', RegistrationUser, AuthUser );
 app.use('/restaurants', Restaurants );
 app.use('/basket', Basket);
+app.use('/purchase', Payment);
 
 app.use((req, res, next) => {
     const err = new Error('Page not found');
