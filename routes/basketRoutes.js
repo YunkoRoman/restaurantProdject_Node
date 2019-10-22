@@ -4,9 +4,9 @@ const {deleteProduct, addProduct, readProduct} = require('../controllers/basket'
 
 
 //Роутери для корзини
-router.get('', readProduct);
+router.post('', readProduct);
 router.delete('/:id', deleteProduct);
-router.post('', addProduct);
+// router.post('', addProduct);
 // router.put('', addQuantityWhenTouchInput);
 // router.put('/addition', addQuantity);
 // router.put('/subtraction', subtractionQuantity);

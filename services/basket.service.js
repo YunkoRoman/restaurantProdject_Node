@@ -1,24 +1,20 @@
 const dataBase = require('../dataBase').getInstance();
 const ControllerError = require('../errors/ControllerError');
 
-const userMinAttr = ["id", "name", 'menu_id', 'price'];
 
 class basketService {
-    uploadProduct(id) {
-        const basketModel = dataBase.getModel('basket');
+   async uploadProduct(product_id) {
         const productModel = dataBase.getModel('products');
         try {
-
-            // liit offser order sort
-            return basketModel.findAll({
-                include: [{
-                    model: productModel,
-                    attributes: userMinAttr
-                }],
-                where: {
-                    user_id: id
-                }
-            })
+            const products =  product_id.map( async id => {
+              const a = await  productModel.findOne({
+                    where:{
+                        id
+                    }
+                });
+                return a.dataValues
+            });
+           return await Promise.all(products)
         } catch (e) {
             throw new ControllerError(e.parent.sqlMessage, 500, 'basketService/uploadProduct')
         }
@@ -39,16 +35,14 @@ class basketService {
 
     }
 
-    addProduct(product_id, user_id, price, restaurant_id) {
-        console.log(restaurant_id);
+    addProduct( user_id, product, restaurant_id) {
         const basketModel = dataBase.getModel('basket');
-        const Price = Number(price);
+
+        // const Price = Number(price);
         try {
             return basketModel.create({
-                product_id,
                 user_id,
-                quantity: 1,
-                total_price: Price,
+                product:JSON.stringify(product),
                 restaurant_id
             })
         } catch (e) {
@@ -56,12 +50,11 @@ class basketService {
         }
     }
 
-    CheckProduct(product_id, user_id) {
+    CheckProduct( user_id) {
         const basketModel = dataBase.getModel('basket');
         try {
             return basketModel.findOne({
                 where: {
-                    product_id,
                     user_id
                 }
             })

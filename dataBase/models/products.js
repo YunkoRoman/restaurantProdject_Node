@@ -12,15 +12,15 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING
             },
             restaurant_id: {
-                type: DataTypes.STRING,
+                type: DataTypes.INTEGER,
                 foreignKey: true
             },
             menu_id: {
-                type: DataTypes.STRING,
+                type: DataTypes.INTEGER,
                 foreignKey: true
             },
             price:{
-                type: DataTypes.STRING,
+                type: DataTypes.INTEGER,
             }
         },
         {
