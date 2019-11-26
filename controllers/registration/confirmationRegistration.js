@@ -2,8 +2,9 @@ const dataBase = require('../../dataBase').getInstance();
 const {tokenVerifikator} = require('../../helpers');
 const ControllerError = require('../../errors/ControllerError');
 
-//Підтвердження пошти.
+//checking email
 //З фронта приходить токен, ми його розшифровуємо та змінюємо checked на true
+// With Front walk valid token, we decode it and change checked to true
 
 module.exports = async (req, res) => {
     try {

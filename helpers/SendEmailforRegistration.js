@@ -2,7 +2,7 @@ const {email, password} = require('../constants/mailInfo');
 const mailer = require('nodemailer');
 const TokenGenerator = require('../helpers/tokinayzer').register;
 
-// Скріпт відправки токена на пошту
+// It is script sending token to email
 
 module.exports = async (user, UserEmail) => {
     const transport = mailer.createTransport({

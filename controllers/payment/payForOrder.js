@@ -2,6 +2,8 @@ const ControllerError = require('../../errors/ControllerError');
 const {tokenVerifikator} = require('../../helpers');
 const {authService, purchase} = require('../../services');
 
+// Payment using Stripe
+
 module.exports = async (req, res, next) => {
     try {
         const token = req.get('Authorization');

@@ -6,7 +6,7 @@ const {registrationService} = require('../../services');
 const {userValidator} = require('../../validators');
 
 
-//Реєстрація користувача
+//Registration user
 
 module.exports = async (req, res, next) => {
     try {

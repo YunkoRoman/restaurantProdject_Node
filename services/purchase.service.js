@@ -3,6 +3,8 @@ const stripe = require('stripe')(secret.StripeSecretKey);
 
 const ControllerError = require('../errors/ControllerError');
 
+// service Payment  isn't end
+
 class Purchase {
 
     payment (tokenId) {

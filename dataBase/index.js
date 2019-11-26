@@ -6,30 +6,33 @@ module.exports = (() => {
     let instance;
 
     function initConnection() {
-        const client = new Sequalize('restaurant', 'root', 'root', {
+        const client = new Sequalize('restaurant_progect', 'root', 'root', {
             host: 'localhost',
             dialect: 'mysql'
         });
-        let models = {};
 
-        function getModels() {
+        let models = {};
+        function  getModels() {
             fs.readdir('./dataBase/models', (err, files) => {
                 files.forEach(file => {
                     const [modelName] = file.split('.');
                     models[modelName] = client.import(resolve(`./dataBase/models/${modelName}`))
                 });
             });
-        }
+
+   }
+
 
         return {
             getModel: modelName => models[modelName],
             setModels: () => getModels()
+
         };
     }
 
     return {
         getInstance: () => {
-            if (!instance) instance = initConnection();
+            if(!instance) instance = initConnection();
             return instance;
         }
     }

@@ -1,53 +1,78 @@
 const dataBase = require('../dataBase').getInstance();
 const ControllerError = require('../errors/ControllerError');
 
+
+
 class restaurantService {
+    restaurantInfo(id) {
+        const restModel = dataBase.getModel('restaurant');
+
+
+        try {
+            return restModel.findAll(
+                {
+
+                    where: {
+                        id
+                    }
+                }
+            )
+
+
+        } catch (e) {
+            throw new ControllerError(e.parent.sqlMessage, 500, 'restaurantService')
+        }
+    }
+
+    restaurantProduct(id) {
+        const prodModel = dataBase.getModel('products');
+        const menuModel = dataBase.getModel('menus');
+
+        try {
+
+            return prodModel.findAll(
+                {
+                    include: [{
+                        model: menuModel
+                    }],
+                    where: {
+                        restaurant_id: id
+                    }
+                }
+            )
+
+
+        } catch (e) {
+            throw new ControllerError(e.parent.sqlMessage, 500, 'restaurantService')
+        }
+    }
 
     restaurantList() {
-        const RestaurantsModel = dataBase.getModel('restaurants');
+        const restModel = dataBase.getModel('restaurants');
         try {
-            return RestaurantsModel.findAll()
+            return restModel.findAll()
 
         } catch (e) {
-            throw new ControllerError(e.parent.sqlMessage, 500, 'restaurantService/restaurantList')
+            throw new ControllerError(e.parent.sqlMessage, 500, 'restaurantService')
         }
+
     }
 
-    restaurantMenu(restaurant_id) {
-        const menus = dataBase.getModel('menus');
-        const restaurant = dataBase.getModel('restaurants');
+    restaurantMenu (restaurant_id)  {
 
         try {
-            return menus.findAll({
-                include: {
-                    model: restaurant
-                },
-                where: {
-                    restaurant_id
-                }
-            })
+            return Connect.query('SELECT * FROM `menus`').then( rows => {
+                console.log(rows);
+            } )
+
+
+
         } catch (e) {
-            throw new ControllerError(e.parent.sqlMessage, 500, 'restaurantService/restaurantMenu')
+            throw new ControllerError(e.parent.sqlMessage, 500, 'restaurantService')
         }
+
     }
 
-    restaurantProduct(menu_id) {
-        const product_to_menu = dataBase.getModel('product_to_menu');
-        const products = dataBase.getModel('products');
-
-        try {
-            return product_to_menu.findAll({
-                include: [{
-                    model: products
-                }],
-                where: {
-                    menu_id
-                }
-            })
-        } catch (e) {
-            throw new ControllerError(e.parent.sqlMessage, 500, 'restaurantService/restaurantMenu')
-        }
-    }
 
 }
 

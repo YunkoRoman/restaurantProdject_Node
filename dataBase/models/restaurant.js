@@ -1,29 +1,28 @@
 module.exports = (sequelize, DataTypes) => {
-    const order = sequelize.define('order', {
+    const restaurant = sequelize.define('restaurant', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
+        name: {
+            type: DataTypes.STRING
+        },
+        description: {
+            type: DataTypes.STRING,
+        },
+        address: {
+            type: DataTypes.STRING,
+        },
+        path_to_img: {
+            type: DataTypes.STRING,
+        },
 
-        user_id: {
-            type: DataTypes.STRING,
-            foreignKey: true
-        },
-        product_id: {
-            type: DataTypes.STRING,
-            foreignKey: true
-        },
-        quantity: {
-            type: DataTypes.INTEGER
-        },
-        restaurant_id: {
-            type: DataTypes.INTEGER
-        }
     }, {
-        tableName: 'order',
+        tableName: 'restaurants',
         timestamps: false
     });
 
-    return order
+
+    return restaurant
 };

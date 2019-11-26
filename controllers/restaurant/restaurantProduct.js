@@ -1,7 +1,7 @@
 const ControllerError = require('../../errors/ControllerError');
 const {restaurantService} = require('../../services');
 
-//Дістаємо з бази продукцію відповідно до меню
+//Get all products
 
 module.exports = async (req, res, next) => {
     try {

@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         description: {
             type: DataTypes.STRING
+        },
+        path_to_img:{
+            type: DataTypes.STRING
         }
     }, {
         tableName: 'restaurants',

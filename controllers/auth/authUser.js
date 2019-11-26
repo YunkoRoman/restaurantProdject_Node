@@ -2,7 +2,7 @@ const {tokinayzer} = require('../../helpers');
 const ControllerError = require('../../errors/ControllerError');
 const {authService} = require('../../services');
 
-//Авторизація користувача
+//Authorisation user
 
 
 module.exports = async (req, res, next) => {

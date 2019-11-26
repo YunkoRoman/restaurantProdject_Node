@@ -3,9 +3,11 @@ const path = require('path');
 const cors = require('cors');
 
 const dataBase = require('./dataBase').getInstance();
-const app = express();
 
+const app = express();
 const {AuthUser,Restaurants,Basket,RegistrationUser, Payment} = require('./routes');
+
+dataBase.setModels();
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin","http://localhost:4200");
@@ -22,10 +24,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-dataBase.setModels();
+
 app.use('/user', RegistrationUser, AuthUser );
 app.use('/restaurants', Restaurants );
-app.use('/basket', Basket);
 app.use('/purchase', Payment);
 
 app.use((req, res, next) => {
