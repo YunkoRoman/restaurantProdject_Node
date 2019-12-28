@@ -3,10 +3,10 @@ const {restaurantService} = require('../../services');
 
 //Get restaurants list
 
-module.exports = async (req, res, next) => {
+module.exports =  async (req, res, next) => {
     try {
 
-        const AllRestaurant = await restaurantService.restaurantList();
+        const AllRestaurant = await     restaurantService.restaurantList();
         res.json({
             success: true,
             msg: AllRestaurant

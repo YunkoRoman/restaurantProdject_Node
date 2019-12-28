@@ -8,7 +8,7 @@ router.get('/', restaurantList);
 router.get('/menu/:id', restaurantMenu);
 router.get('/info/:id', restaurantInfo);
 //TODO in future separate product router from restaurant router
-router.get('/product/:id', restaurantProduct);
+router.get('/products/:id', restaurantProduct);
 
 
 
