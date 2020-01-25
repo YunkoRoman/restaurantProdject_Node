@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
 
 
         const result = await orderService.saveOrder(order);
-        // console.log(result);
+        console.log(result);
         res.json({
             success: true,
             msg:result

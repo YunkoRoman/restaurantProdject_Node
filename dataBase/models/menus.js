@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     });
     const products = sequelize.import('./products.js');
-    menus.belongsTo(products, {foreignKey: 'id'});
+    menus.hasMany(products, {foreignKey: 'menu_id'});
 
     return menus
 };

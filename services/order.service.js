@@ -16,8 +16,6 @@ class restaurantService {
                         restaurant_id
                     }
                 });
-
-
             });
             return Promise.all(products).then((product) => {
                 return product
@@ -29,18 +27,37 @@ class restaurantService {
         }
     }
 
-    saveOrder(Order){
+    async saveOrder(Order) {
         const OrdersModel = dataBase.getModel('orders');
+        const OrderLineModel = dataBase.getModel('orderLine');
         try {
             const date = Date.now();
-            console.log(date);
-            const{orders, restaurant_id} = Order;
-            const Orders = JSON.stringify(orders);
-          return OrdersModel.create({
-                orders: Orders,
+            const restaurant_id = Order[1];
+
+            const result = await OrdersModel.create({
                 date,
                 restaurant_id
             });
+            if (result.id) {
+                const order_id = result.id;
+                const orderList = Order[0].orders.map(e => {
+                    return OrderLineModel.create({
+                        order_id,
+                        product_id: e.id,
+                        price: e.price,
+                        qtt: e.qtt
+                    })
+                });
+                return Promise.all(orderList).then((element) => {
+                    if (element) {
+                        return true
+                    }
+                    else {
+                        return false
+                    }
+                })
+            }
+
 
         } catch (e) {
             throw new ControllerError(e.parent.sqlMessage, 500, 'orderService')

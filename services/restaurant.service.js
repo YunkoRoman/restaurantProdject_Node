@@ -55,9 +55,13 @@ class restaurantService {
 
     restaurantMenu(restaurant_id) {
         const menusModel = dataBase.getModel('menus');
+        const productModel = dataBase.getModel('products');
         try {
             return menusModel.findAll({
-                where:{
+                include: [
+                    {model: productModel}
+                ],
+                where: {
                     restaurant_id
                 }
             })
