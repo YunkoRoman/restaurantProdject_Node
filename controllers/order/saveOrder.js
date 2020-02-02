@@ -6,10 +6,9 @@ const {orderService} = require('../../services');
 module.exports = async (req, res, next) => {
     try {
         const order = req.body;
-
+        console.log(order);
 
         const result = await orderService.saveOrder(order);
-        console.log(result);
         res.json({
             success: true,
             msg:result

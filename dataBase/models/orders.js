@@ -9,11 +9,14 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 foreignKey: true
             },
-            status: {
-                type: DataTypes.STRING,
+            status_id: {
+                type: DataTypes.INTEGER,
             },
             date: {
-                type: DataTypes.STRING
+                type: DataTypes.DATE
+            },
+            total_price:{
+                type: DataTypes.INTEGER
             }
         },
         {

@@ -30,17 +30,28 @@ class restaurantService {
     async saveOrder(Order) {
         const OrdersModel = dataBase.getModel('orders');
         const OrderLineModel = dataBase.getModel('orderLine');
+        const OrderStatusModel = dataBase.getModel('order_status');
         try {
             const date = Date.now();
-            const restaurant_id = Order[1];
+            const {orders, restaurant_id, totalPrice: total_price} = Order;
 
-            const result = await OrdersModel.create({
-                date,
-                restaurant_id
+            const restaurantDefaultOrderStatus = await OrderStatusModel.findOne({
+                where: {
+                    restaurant_id,
+                    default: true
+                }
             });
-            if (result.id) {
-                const order_id = result.id;
-                const orderList = Order[0].orders.map(e => {
+            const {status_id} = restaurantDefaultOrderStatus;
+            console.log(status_id);
+            const resultSave = await OrdersModel.create({
+                date,
+                restaurant_id,
+                status_id,
+                total_price
+            });
+            if (resultSave.id) {
+                const order_id = resultSave.id;
+                const orderList = orders.map(e => {
                     return OrderLineModel.create({
                         order_id,
                         product_id: e.id,

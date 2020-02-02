@@ -23,7 +23,7 @@
 //         const UserModel = dataBase.getModel('users');
 //
 //         try {
-//             // toDO service dont check it
+//             // toDO service don't check it
 //             if (!id || !name || !surname) throw new Error('Some field is empty');
 //             return UserModel.findOne({
 //                 where: {
