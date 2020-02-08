@@ -1,8 +1,8 @@
 const router = require('express').Router();
-// TODO index
+
 const {authUser} = require('../controllers/auth');
 
-//Роутери для входу
-router.post('/auth', authUser);
+
+router.post('/', authUser);
 
 module.exports = router;

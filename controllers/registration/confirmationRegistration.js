@@ -3,14 +3,15 @@ const {tokenVerifikator} = require('../../helpers');
 const ControllerError = require('../../errors/ControllerError');
 
 //checking email
-//З фронта приходить токен, ми його розшифровуємо та змінюємо checked на true
-// With Front walk valid token, we decode it and change checked to true
+//  we have request with valid token, we decode it and change checked to true
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, next) => {
     try {
         const UserModel = dataBase.getModel('users');
         const {token} = req.body;
-        const {user:id} = tokenVerifikator(token);
+        console.log(token);
+        const {user:id} = tokenVerifikator.registration(token);
+        console.log(id);
 
         if (!token) throw new Error('No token');
         if (!id) throw new Error('User not valid');
@@ -29,7 +30,7 @@ module.exports = async (req, res) => {
         })
 
     } catch (e) {
-        next( new ControllerError(e.message, e.status, 'authUser'))
+        next( new ControllerError(e.message, e.status, 'confirmationRegistration'))
     }
 
 };

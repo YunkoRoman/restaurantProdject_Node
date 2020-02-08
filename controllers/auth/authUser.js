@@ -8,6 +8,7 @@ const {authService} = require('../../services');
 module.exports = async (req, res, next) => {
     try {
         const {email, password} = req.body;
+
         if (!email && !password) throw new Error('Some field is empty');
 
         const UserIsRegistr = await authService.authUser(email, password);
@@ -23,7 +24,7 @@ module.exports = async (req, res, next) => {
 
 
     } catch (e) {
-        next(new ControllerError(e.message, e.status, 'authUser'))
+        next(new ControllerError(e.message, e.status, 'controllers/auth/authUser'))
     }
 
 };
