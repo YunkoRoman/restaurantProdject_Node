@@ -27,7 +27,7 @@ class restaurantService {
         }
     }
 
-    async saveOrder(Order) {
+    async saveOrder(Order, user_id) {
         const OrdersModel = dataBase.getModel('orders');
         const OrderLineModel = dataBase.getModel('orderLine');
         const OrderStatusModel = dataBase.getModel('order_status');
@@ -47,7 +47,8 @@ class restaurantService {
                 date,
                 restaurant_id,
                 status_id,
-                total_price
+                total_price,
+                user_id
             });
             if (resultSave.id) {
                 const order_id = resultSave.id;
@@ -68,10 +69,8 @@ class restaurantService {
                     }
                 })
             }
-
-
         } catch (e) {
-            throw new ControllerError(e.parent.sqlMessage, 500, 'orderService')
+            throw new ControllerError(e.parent.sqlMessage, 500, 'orderService/saveOrder')
         }
     }
 

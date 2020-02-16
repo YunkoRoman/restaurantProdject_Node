@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const order_line = sequelize.define('order_line', {
+    const orderLine = sequelize.define('order_line', {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
@@ -25,6 +25,8 @@ module.exports = (sequelize, DataTypes) => {
             timestamps: false
         });
 
+    const product = sequelize.import('./products.js');
+    orderLine.belongsTo(product, {foreignKey:'product_id'});
 
-    return order_line
+    return orderLine
 };

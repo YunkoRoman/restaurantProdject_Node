@@ -1,6 +1,5 @@
 const ControllerError = require('../../errors/ControllerError');
 const {restaurantService} = require('../../services');
-const restaurantModel = require('../../dataBase/models/restaurant');
 
 
 

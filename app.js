@@ -5,7 +5,7 @@ const cors = require('cors');
 const dataBase = require('./dataBase').getInstance();
 
 const app = express();
-const {AuthUser,Restaurants,Order,RegistrationUser, Payment} = require('./routes');
+const {AuthUser,Restaurants,Order,RegistrationUser, Payment, User} = require('./routes');
 
 dataBase.setModels();
 
@@ -30,6 +30,7 @@ app.use('/auth',  AuthUser );
 app.use('/restaurants', Restaurants );
 app.use('/purchase', Payment);
 app.use('/order', Order);
+app.use('/user', User);
 
 app.use((req, res, next) => {
     const err = new Error('Page not found');
