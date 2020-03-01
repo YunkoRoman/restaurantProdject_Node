@@ -18,6 +18,13 @@ module.exports = (sequelize, DataTypes) => {
             },
             qtt: {
                 type: DataTypes.INTEGER
+            },
+            user_id: {
+                type: DataTypes.INTEGER
+            },
+            restaurant_id: {
+                type: DataTypes.INTEGER,
+                foreignKey: true
             }
         },
         {
@@ -26,7 +33,10 @@ module.exports = (sequelize, DataTypes) => {
         });
 
     const product = sequelize.import('./products.js');
-    orderLine.belongsTo(product, {foreignKey:'product_id'});
+    orderLine.belongsTo(product, {foreignKey: 'product_id'});
+
+    const restaurant = sequelize.import('./restaurant');
+    orderLine.belongsTo(restaurant, {foreignKey:'restaurant_id'});
 
     return orderLine
 };

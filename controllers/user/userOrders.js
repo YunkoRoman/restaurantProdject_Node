@@ -8,10 +8,8 @@ module.exports = async (req, res, next) => {
         const token = req.get('Authorization');
         if (!token) throw new Error('No token');
         const {id:user_id} = tokenVerif.auth(token);
-        console.log(user_id);
 
         const orders = await userService.userOrders(user_id);
-        console.log(orders);
 
         res.json({
             success: true,

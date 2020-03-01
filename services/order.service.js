@@ -31,9 +31,10 @@ class restaurantService {
         const OrdersModel = dataBase.getModel('orders');
         const OrderLineModel = dataBase.getModel('orderLine');
         const OrderStatusModel = dataBase.getModel('order_status');
+        const UsersProducts = dataBase.getModel('users_products')
         try {
             const date = Date.now();
-            const {orders, restaurant_id, totalPrice: total_price} = Order;
+            const {orders, restaurant_id, totalPrice: total_price, table_numb, pay_method:payment_method} = Order;
 
             const restaurantDefaultOrderStatus = await OrderStatusModel.findOne({
                 where: {
@@ -48,7 +49,9 @@ class restaurantService {
                 restaurant_id,
                 status_id,
                 total_price,
-                user_id
+                user_id,
+                table_numb,
+                payment_method
             });
             if (resultSave.id) {
                 const order_id = resultSave.id;
@@ -57,9 +60,12 @@ class restaurantService {
                         order_id,
                         product_id: e.id,
                         price: e.price,
-                        qtt: e.qtt
-                    })
+                        qtt: e.qtt,
+                        user_id,
+                        restaurant_id
+                    });
                 });
+
                 return Promise.all(orderList).then((element) => {
                     if (element) {
                         return true
@@ -67,7 +73,9 @@ class restaurantService {
                     else {
                         return false
                     }
-                })
+                });
+
+
             }
         } catch (e) {
             throw new ControllerError(e.parent.sqlMessage, 500, 'orderService/saveOrder')

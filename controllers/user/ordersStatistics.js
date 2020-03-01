@@ -1,26 +1,22 @@
-// Saving order with products which user chose
-
 const ControllerError = require('../../errors/ControllerError');
+const {userService} = require('../../services');
 const tokenVerif = require('../../helpers/tokenVerifikator')
-const {orderService} = require('../../services');
-
-
 module.exports = async (req, res, next) => {
+
     try {
 
         const token = req.get('Authorization');
         if (!token) throw new Error('No token');
         const {id:user_id} = tokenVerif.auth(token);
-        const order = req.body;
-        console.log(order);
 
-        const result = await orderService.saveOrder(order, user_id);
+        const statistics = await userService.UserStatistics(user_id);
+
         res.json({
             success: true,
-            msg:result
+            msg:statistics
         });
     } catch (e) {
-        next(new ControllerError(e.message, e.status, 'controllers/saveOrders'))
-    }
+        next(new ControllerError(e.message, e.status, 'controllers/user/ordersStatistics'))
 
+    }
 };
