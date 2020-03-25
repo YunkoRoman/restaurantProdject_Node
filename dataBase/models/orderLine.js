@@ -25,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
             restaurant_id: {
                 type: DataTypes.INTEGER,
                 foreignKey: true
+            },
+            date: {
+                type: DataTypes.DATE,
+                foreignKey: true
             }
         },
         {

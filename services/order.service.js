@@ -62,7 +62,8 @@ class restaurantService {
                         price: e.price,
                         qtt: e.qtt,
                         user_id,
-                        restaurant_id
+                        restaurant_id,
+                        date
                     });
                 });
 

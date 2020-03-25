@@ -19,8 +19,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 foreignKey: true
             },
-            price:{
+            price: {
                 type: DataTypes.INTEGER,
+            },
+            path: {
+                type: DataTypes.STRING,
             }
         },
         {
