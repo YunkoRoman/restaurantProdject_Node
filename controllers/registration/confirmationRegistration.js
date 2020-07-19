@@ -3,15 +3,15 @@ const {tokenVerifikator} = require('../../helpers');
 const ControllerError = require('../../errors/ControllerError');
 
 //checking email
-//  we have request with valid token, we decode it and change checked to true
+// the controller get request with token, check it and update data in DB
 
 module.exports = async (req, res, next) => {
     try {
         const UserModel = dataBase.getModel('users');
         const {token} = req.body;
-        console.log(token);
+
         const {user:id} = tokenVerifikator.registration(token);
-        console.log(id);
+
 
         if (!token) throw new Error('No token');
         if (!id) throw new Error('User not valid');

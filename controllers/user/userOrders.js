@@ -1,6 +1,9 @@
 const ControllerError = require('../../errors/ControllerError');
 const {userService} = require('../../services');
 const tokenVerif = require('../../helpers/tokenVerifikator')
+
+
+//The controller where generate user's order history
 module.exports = async (req, res, next) => {
 
     try {

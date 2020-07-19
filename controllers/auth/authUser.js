@@ -12,7 +12,8 @@ module.exports = async (req, res, next) => {
         if (!email && !password) throw new Error('Some field is empty');
 
         const UserIsRegistr = await authService.authUser(email, password);
-        if (!UserIsRegistr) throw new Error('You are not register');
+
+        if ( UserIsRegistr === null) throw new Error('You are not register');
 
         const {id, name, surname} = UserIsRegistr;
         const token = tokinayzer.auth({id, name, surname});

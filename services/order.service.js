@@ -34,7 +34,7 @@ class restaurantService {
         const UsersProducts = dataBase.getModel('users_products')
         try {
             const date = Date.now();
-            const {orders, restaurant_id, totalPrice: total_price, table_numb, pay_method:payment_method} = Order;
+            const {orders, restaurant_id, totalPrice: total_price, table_numb, pay_method: payment_method} = Order;
 
             const restaurantDefaultOrderStatus = await OrderStatusModel.findOne({
                 where: {
@@ -43,7 +43,7 @@ class restaurantService {
                 }
             });
             const {status_id} = restaurantDefaultOrderStatus;
-            console.log(status_id);
+
             const resultSave = await OrdersModel.create({
                 date,
                 restaurant_id,
@@ -56,6 +56,7 @@ class restaurantService {
             if (resultSave.id) {
                 const order_id = resultSave.id;
                 const orderList = orders.map(e => {
+                    console.log(e);
                     return OrderLineModel.create({
                         order_id,
                         product_id: e.id,
@@ -63,7 +64,8 @@ class restaurantService {
                         qtt: e.qtt,
                         user_id,
                         restaurant_id,
-                        date
+                        date,
+                        menu_id: e.menu_id
                     });
                 });
 

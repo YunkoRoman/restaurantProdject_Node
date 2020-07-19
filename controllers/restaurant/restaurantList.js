@@ -1,7 +1,7 @@
 const ControllerError = require('../../errors/ControllerError');
 const {restaurantService} = require('../../services');
 
-//Get restaurants list
+//Giving restaurants list
 
 module.exports =  async (req, res, next) => {
     try {

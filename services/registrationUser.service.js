@@ -4,6 +4,7 @@ const ControllerError = require('../errors/ControllerError');
 class registrationService {
 
     registrUser(userObj) {
+        console.log(userObj);
         const UserModel = dataBase.getModel('users');
         const {name, surname, email, password} = userObj;
         try {

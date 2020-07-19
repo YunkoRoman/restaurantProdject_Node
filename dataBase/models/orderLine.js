@@ -29,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
             date: {
                 type: DataTypes.DATE,
                 foreignKey: true
+            },
+            menu_id: {
+                type: DataTypes.INTEGER
             }
         },
         {

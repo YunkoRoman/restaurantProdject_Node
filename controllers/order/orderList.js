@@ -1,7 +1,8 @@
 const ControllerError = require('../../errors/ControllerError');
 const {orderService} = require('../../services');
 
-//Get all products for card list
+//Give all products for user basket
+//Controller get array of products id and restaurant id
 
 module.exports = async (req, res, next) => {
     try {

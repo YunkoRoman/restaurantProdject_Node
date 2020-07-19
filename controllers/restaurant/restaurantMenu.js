@@ -5,7 +5,7 @@ const {restaurantService} = require('../../services');
 
 
 
-//Дістаємо з бази список меню
+//Giving all restaurant menus including products
 
 module.exports = async (req, res, next) => {
     try {

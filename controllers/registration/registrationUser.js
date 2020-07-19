@@ -10,13 +10,16 @@ const {userValidator} = require('../../validators');
 
 module.exports = async (req, res, next) => {
     try {
-        const userObj = req.body;
-        if (!userObj) throw new Error('Some field is empty');
+        const {form} = req.body;
 
-        const {email} = userObj;
+        console.log(form);
+        if (!form) throw new Error('Some field is empty');
+
+        const {email} = form;
         // const isUserValid = Joi.validate(userObj, userValidator);
         //
         // if (isUserValid.error) {
+        //     console.log(isUserValid.error);
         //     throw new ControllerError(isUserValid.error.details[0].message, 400, 'registration/registrationUser')
         // }
 
@@ -24,13 +27,14 @@ module.exports = async (req, res, next) => {
 
         if (findEmail) throw new Error('This email already is register');
 
-        const createNewUser = await registrationService.registrUser(userObj);
-        const info = await sendEmail(createNewUser.id, email);
+        const createNewUser = await registrationService.registrUser(form);
+
+        // const info = await sendEmail(createNewUser.id, email);
 
         res.json({
             success: true,
             msg: createNewUser,
-            msg2: info
+            // msg2: info
         })
 
 

@@ -3,7 +3,7 @@ const {restaurantService} = require('../../services');
 
 
 
-//Get restaurants info
+//Giving restaurants info
 
 module.exports = async (req, res, next) => {
     try {

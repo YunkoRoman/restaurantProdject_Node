@@ -1,4 +1,4 @@
 module.exports= {
-    hostFront: 'http://localhost:4201',
+    hostFront: 'http://localhost:4200',
 
 };
